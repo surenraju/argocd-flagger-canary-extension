@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Git tag to build release from"
+
+jobs:
+  build-ui:
+    name: Build UI Assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install UI dependencies
+        run: yarn --cwd ui install
+
+      - name: Build UI asset
+        run: yarn --cwd ui build
+
+      - name: Draft release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.tag }}
+          draft: true
+          files: |
+            ui/dist/extension.tar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
