@@ -37,6 +37,12 @@ export const CanaryWidget = (props: {
                             <InfoItemRow items={{content: canaryPhaseFormatted, icon: 'fa-regular fa-hourglass-half'}} label='Phase' />
                         </React.Fragment>
                     </ThemeDiv>
+                {props.resource.status.phase === "Waiting" &&
+                    <div style={{width: '50%', marginBottom: '1em'}}>
+                        <button className='argo-button argo-button--base' onClick={async () => {
+                        }}>Promote Canary</button>
+                    </div>
+                }
             </ThemeDiv>
    
         </React.Fragment>
