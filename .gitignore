@@ -1,0 +1,5 @@
+# Build output
+ui/dist/
+
+# Dependencies
+ui/node_modules/
