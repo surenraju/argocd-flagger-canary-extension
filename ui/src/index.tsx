@@ -11,13 +11,14 @@ export const CanaryWidget = (props: {
     tree: any;
     resource: Canary;
   }) => {
-    JSON.stringify(`Tree: ${props.tree}`);
-    JSON.stringify(`Tree: ${props.resource}`);
+
+    console.log( JSON.stringify( props.tree));
+    console.log( JSON.stringify(props.resource));
    
     const steps =Math.round(props.resource.spec.analysis.maxWeight / props.resource.spec.analysis.stepWeight)
-    let currentStep = Math.round(props.resource.spec.analysis.maxWeight / props.resource.status.canaryWeight)
-    if (props.resource.status.canaryWeight == 0) {
-        currentStep = 0
+    let currentStep = 0
+    if (props.resource.status.canaryWeight > 0) {
+        currentStep = Math.round(props.resource.spec.analysis.maxWeight / props.resource.status.canaryWeight)
     }
     const stepFormatted = `${currentStep}/${steps}`
     const canaryWeightFormatted = `${props.resource.status.canaryWeight}`
