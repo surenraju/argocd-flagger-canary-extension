@@ -8,12 +8,17 @@ export type Canary = TypeMeta & { metadata: ObjectMeta } & {
 };
 
 export const CanaryWidget = (props: {canary: Canary;  namespace: string}) => {
-    const steps =Math.round(props.canary.spec.analysis.maxWeight / props.canary.spec.analysis.stepWeight)
-    const currentStep = Math.round(props.canary.spec.analysis.maxWeight / props.canary.status.canaryWeight)
-    const stepFormatted = `${currentStep}/${steps}`
-    const canaryWeightFormatted = `${props.canary.status.canaryWeight}`
-    const canaryMaxWeightFormatted = `${props.canary.spec.analysis.maxWeight}`
-    const canaryPhaseFormatted =  `${props.canary.status.phase}`
+    //const steps =Math.round(props.canary.spec.analysis.maxWeight / props.canary.spec.analysis.stepWeight)
+    //const currentStep = Math.round(props.canary.spec.analysis.maxWeight / props.canary.status.canaryWeight)
+    //const stepFormatted = `${currentStep}/${steps}`
+    //const canaryWeightFormatted = `${props.canary.status.canaryWeight}`
+    //const canaryMaxWeightFormatted = `${props.canary.spec.analysis.maxWeight}`
+    //const canaryPhaseFormatted =  `${props.canary.status.phase}`
+
+    const stepFormatted = ''
+    const canaryWeightFormatted =''
+    const canaryMaxWeightFormatted =''
+    const canaryPhaseFormatted = ''
     return (
         <React.Fragment>
             <div className='rollout__row rollout__row--top'>
