@@ -17,8 +17,10 @@ export const CanaryWidget = (props: {
    
     const steps =Math.round(props.resource.spec.analysis.maxWeight / props.resource.spec.analysis.stepWeight)
     let currentStep = 0
-    if (props.resource.status.canaryWeight > 0) {
-        currentStep = Math.round(props.resource.spec.analysis.maxWeight / props.resource.status.canaryWeight)
+    if (props.resource.status.canaryWeight == props.resource.spec.analysis.maxWeight) {
+        currentStep = steps
+    } else if (props.resource.status.canaryWeight > 0) {
+         currentStep = 1 + steps - Math.round(props.resource.spec.analysis.maxWeight / props.resource.status.canaryWeight)  
     }
     const stepFormatted = `${currentStep}/${steps}`
     const canaryWeightFormatted = `${props.resource.status.canaryWeight}`
@@ -38,12 +40,12 @@ export const CanaryWidget = (props: {
                             <InfoItemRow items={{content: canaryPhaseFormatted, icon: 'fa-regular fa-hourglass-half'}} label='Phase' />
                         </React.Fragment>
                     </ThemeDiv>
-                {props.resource.status.phase === "Waiting" &&
+               
                     <div style={{width: '50%', marginBottom: '1em'}}>
                         <button className='argo-button argo-button--base' onClick={async () => {
                         }}>Promote Canary</button>
                     </div>
-                }
+                
             </ThemeDiv>
    
         </React.Fragment>
