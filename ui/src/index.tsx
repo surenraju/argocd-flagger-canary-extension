@@ -7,13 +7,16 @@ export type Canary = TypeMeta & { metadata: ObjectMeta } & {
     spec: CanarySpec;
 };
 
-export const CanaryWidget = (props: {canary: Canary;  namespace: string}) => {
-    const steps =Math.round(props.canary.spec.analysis.maxWeight / props.canary.spec.analysis.stepWeight)
-    const currentStep = Math.round(props.canary.spec.analysis.maxWeight / props.canary.status.canaryWeight)
+export const CanaryWidget = (props: {
+    tree: any;
+    resource: Canary;
+  }) => {
+    const steps =Math.round(props.resource.spec.analysis.maxWeight / props.resource.spec.analysis.stepWeight)
+    const currentStep = Math.round(props.resource.spec.analysis.maxWeight / props.resource.status.canaryWeight)
     const stepFormatted = `${currentStep}/${steps}`
-    const canaryWeightFormatted = `${props.canary.status.canaryWeight}`
-    const canaryMaxWeightFormatted = `${props.canary.spec.analysis.maxWeight}`
-    const canaryPhaseFormatted =  `${props.canary.status.phase}`
+    const canaryWeightFormatted = `${props.resource.status.canaryWeight}`
+    const canaryMaxWeightFormatted = `${props.resource.spec.analysis.maxWeight}`
+    const canaryPhaseFormatted =  `${props.resource.status.phase}`
 
     return (
         <React.Fragment>
