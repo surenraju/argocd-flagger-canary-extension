@@ -13,8 +13,12 @@ export const CanaryWidget = (props: {
   }) => {
     JSON.stringify(`Tree: ${props.tree}`);
     JSON.stringify(`Tree: ${props.resource}`);
+   
     const steps =Math.round(props.resource.spec.analysis.maxWeight / props.resource.spec.analysis.stepWeight)
-    const currentStep = Math.round(props.resource.spec.analysis.maxWeight / props.resource.status.canaryWeight)
+    let currentStep = Math.round(props.resource.spec.analysis.maxWeight / props.resource.status.canaryWeight)
+    if (props.resource.status.canaryWeight == 0) {
+        currentStep = 0
+    }
     const stepFormatted = `${currentStep}/${steps}`
     const canaryWeightFormatted = `${props.resource.status.canaryWeight}`
     const canaryMaxWeightFormatted = `${props.resource.spec.analysis.maxWeight}`
@@ -22,9 +26,9 @@ export const CanaryWidget = (props: {
 
     return (
         <React.Fragment>
-            <div className='rollout__row rollout__row--top'>
-                <ThemeDiv className='info rollout__info'>
-                    <div className='info__title'>Summary</div>
+           
+            <ThemeDiv className='argo-box'>
+                    <ThemeDiv className='argo-box__title'>Summary</ThemeDiv>
                     <ThemeDiv className='rollout__info__section'>
                         <React.Fragment>
                             <InfoItemRow items={{content: stepFormatted, icon: 'fa-shoe-prints'}} label='Step' />
@@ -33,8 +37,8 @@ export const CanaryWidget = (props: {
                             <InfoItemRow items={{content: canaryPhaseFormatted, icon: 'fa-regular fa-hourglass-half'}} label='Phase' />
                         </React.Fragment>
                     </ThemeDiv>
-                </ThemeDiv>
-            </div>
+            </ThemeDiv>
+   
         </React.Fragment>
     );
 }
