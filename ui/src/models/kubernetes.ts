@@ -35,5 +35,13 @@ export interface CanaryStatus {
 }
 
 export interface CanarySpec {
-    
-  }
+    analysis: CanaryAnalysis;
+    skipAnalysis: boolean
+}
+
+export interface CanaryAnalysis {
+  interval?: string;
+  threshold?: number;
+  maxWeight?: number;
+  stepWeight?: number;
+}
