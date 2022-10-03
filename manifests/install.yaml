@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ArgoCDExtension
 metadata:
-  name: argo-rollouts
+  name: flagger-canary
   finalizers:
     - extensions-finalizer.argocd.argoproj.io
 spec:
   sources:
   - web:
-      url: https://github.com/argoproj-labs/surenraju/argocd-flagger-canary-extension/download/v0.2.1/extension.tar
+      url: https://github.com/surenraju/argocd-flagger-canary-extension/releases/download/v0.1.0/extension.tar
